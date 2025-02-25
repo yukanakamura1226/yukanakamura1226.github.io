@@ -1,4 +1,4 @@
-<video id="video" width="320" height="240" autoplay></video>
+<!-- <video id="video" width="320" height="240" autoplay></video>
 <script>
   // getUserMedia APIを使用してカメラにアクセス
   navigator.mediaDevices.getUserMedia({ video: true })
@@ -9,4 +9,27 @@
     .catch((error) => {
       console.error("カメラにアクセスできません:", error);
     });
+</script> -->
+
+<video id="video" width="640" height="480" autoplay style="border: 1px solid black;"></video>
+<script>
+  // getUserMedia APIを使用してカメラにアクセス
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({
+      video: {
+        facingMode: "environment"  // 背面カメラ（外カメラ）を指定
+      }
+    })
+    .then((stream) => {
+      const videoElement = document.getElementById('video');
+      videoElement.srcObject = stream;
+      console.log("外カメラ（背面カメラ）ストリームが接続されました");
+    })
+    .catch((error) => {
+      console.error("カメラにアクセスできません:", error);
+      alert("カメラアクセスエラー: " + error.message);
+    });
+  } else {
+    alert("このブラウザはカメラ機能をサポートしていません。");
+  }
 </script>
