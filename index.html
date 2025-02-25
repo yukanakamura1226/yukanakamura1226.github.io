@@ -1,0 +1,12 @@
+<video id="video" width="320" height="240" autoplay></video>
+<script>
+  // getUserMedia APIを使用してカメラにアクセス
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then((stream) => {
+      const videoElement = document.getElementById('video');
+      videoElement.srcObject = stream;
+    })
+    .catch((error) => {
+      console.error("カメラにアクセスできません:", error);
+    });
+</script>
